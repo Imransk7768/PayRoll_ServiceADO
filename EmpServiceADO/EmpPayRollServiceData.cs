@@ -89,5 +89,32 @@ namespace EmpServiceADO
             }
             return EmpDetails;
         }
+        public void Update_EmpDetails(EmpModel emp)  
+        {
+            try
+            {
+                Connection();
+                SqlCommand cmd = new SqlCommand("spUpdateEmployee", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@PhoneNumber", emp.PhoneNumber);
+                cmd.Parameters.AddWithValue("@Department", emp.Department);
+                cmd.Parameters.AddWithValue("@Name", emp.Name);
+                con.Open();
+                int result = cmd.ExecuteNonQuery();
+                con.Close();
+                if (result != 0)
+                {
+                    Console.WriteLine("Updated Sucessfull");
+                }
+                else
+                {
+                    Console.WriteLine("Update Failed");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }
