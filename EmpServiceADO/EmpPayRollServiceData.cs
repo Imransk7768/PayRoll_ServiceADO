@@ -116,5 +116,30 @@ namespace EmpServiceADO
                 Console.WriteLine(ex.Message);
             }
         }
+        public void Delete_EmpDetails(EmpModel emp)           
+        {
+            try
+            {
+                Connection();
+                SqlCommand cmd = new SqlCommand("spDeleteEmployee", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", emp.Id);
+                con.Open();
+                int result = cmd.ExecuteNonQuery();
+                con.Close();
+                if (result != 0)
+                {
+                    Console.WriteLine("Row Deleted Sucessfully");
+                }
+                else
+                {
+                    Console.WriteLine("Deletion Failed");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }

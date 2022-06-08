@@ -8,7 +8,7 @@ namespace EmpServiceADO
         {
             Console.WriteLine(" Welcome to Payroll Service");
             EmpPayRollServiceData empData = new EmpPayRollServiceData();
-            Console.WriteLine("1. Insert Emp Details\n2. Retrieve Emp Details\n3. Update Emp Details\n");
+            Console.WriteLine("1. Insert Emp Details\n2. Retrieve Emp Details\n3. Update Emp Details\n4. Delete data\n");
             Console.Write("Enter option to Execute : ");
             int choose = Convert.ToInt32(Console.ReadLine());
             switch (choose)
@@ -42,6 +42,11 @@ namespace EmpServiceADO
                     updateMdl.Department = "IT";
                     updateMdl.Name = "Surfraz";
                     empData.Update_EmpDetails(updateMdl);
+                    break;
+                case 4:
+                    EmpModel delMdl = new EmpModel();
+                    delMdl.Id = Convert.ToInt32(Console.ReadLine());
+                    empData.Delete_EmpDetails(delMdl);
                     break;
                 default:
                     Console.WriteLine("Execution Ends.");
