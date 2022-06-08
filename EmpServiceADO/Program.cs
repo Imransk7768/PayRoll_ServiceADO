@@ -8,7 +8,7 @@ namespace EmpServiceADO
         {
             Console.WriteLine(" Welcome to Payroll Service");
             EmpPayRollServiceData empData = new EmpPayRollServiceData();
-            Console.WriteLine("1. Insert Emp Details\n2. Retrieve Emp Details\n3. Update Emp Details\n4. Delete data\n");
+            Console.WriteLine("1. Insert Emp Details\n2. Retrieve Emp Details\n3. Update Emp Details\n4. Delete data\n5. Retrieve Date ByDate");
             Console.Write("Enter option to Execute : ");
             int choose = Convert.ToInt32(Console.ReadLine());
             switch (choose)
@@ -47,6 +47,19 @@ namespace EmpServiceADO
                     EmpModel delMdl = new EmpModel();
                     delMdl.Id = Convert.ToInt32(Console.ReadLine());
                     empData.Delete_EmpDetails(delMdl);
+                    break;
+                case 5:
+                    List<EmpModel> listDate = empData.GetEmployeeDetails();
+                    DateTime date = Convert.ToDateTime(Console.ReadLine());
+                    empData.RetrieveDetailsByDate(date);
+                    foreach (EmpModel data in listDate)
+                    {
+                        if (data.StartDate.Equals(date))
+                        {
+                            Console.WriteLine(data.Id + ", " + data.Name + ", " + data.Salary + ", " + data.StartDate + ", " + data.Gender + " " + data.PhoneNumber
+                                + " " + data.Department + " " + data.Deductions + " " + data.Taxable_Pay + " " + data.Income_Tax + " " + data.Net_Pay);
+                        }
+                    }
                     break;
                 default:
                     Console.WriteLine("Execution Ends.");

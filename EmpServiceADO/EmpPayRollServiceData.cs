@@ -141,5 +141,23 @@ namespace EmpServiceADO
                 Console.WriteLine(ex.Message);
             }
         }
+        public void RetrieveDetailsByDate(DateTime date)
+        {
+            Connection();
+            SqlCommand cmd = new SqlCommand("spAddEmployeeDate", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@StartDate", date);
+            con.Open();
+            int result = cmd.ExecuteNonQuery();
+            con.Close();
+            if (result != 0)
+            {
+                Console.WriteLine("Retrieve Data Sucessfull");
+            }
+            else
+            {
+                Console.WriteLine("Selection Failed Sucessfull");
+            }
+        }
     }
 }
